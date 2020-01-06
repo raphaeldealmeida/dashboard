@@ -195,7 +195,7 @@
                                 data.forEach(function (e) {
                                     select.append($('<option>',{
                                         text: e.name,
-                                        value: e.name
+                                        value: e.id
 
                                     }))
                                 })

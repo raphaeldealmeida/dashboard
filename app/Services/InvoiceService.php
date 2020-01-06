@@ -13,7 +13,7 @@ class InvoiceService
     {
         return DB::table(function (Builder $query) use ($currentUser) {
             $query->from(env('DB_DATABASE_LEGACY'). '.tblinvoices', 'i')
-            ->select(["i.id AS invoice_code", "date", "duedate", "total"])
+            ->select(["i.id AS invoice_code", "date", "duedate", "total", 'c.id AS customer_id'])
             ->selectRaw("CASE WHEN status = 'Unpaid' AND duedate <= now() THEN 'Em atraso'
                             WHEN status = 'Unpaid' AND duedate > now() THEN 'Em aberto'
                             WHEN status = 'Paid' THEN 'Pago'
@@ -35,7 +35,7 @@ class InvoiceService
             if ($currentUser) {
                 $query->where('cu.user_id', $currentUser->id);
             }
-        })->select(['invoice_code', 'date', 'duedate', 'total', 'status', 'client']);
+        })->select(['invoice_code', 'date', 'duedate', 'total', 'status', 'client', 'customer_id']);
     }
 
     /**
