@@ -29,12 +29,16 @@ Route::group(['middleware' => 'auth'], function () {
     }]);
 
     Route::get('call/audio/{uuid}/play', ['as' => 'call.audio', function($uuid){
-        $bucket = env('AWS_BUCKET');
         $record = DB::table(env('DB_DATABASE_VOIP') . '.gravacoes_s3')
             ->where('uuid', $uuid)->limit('1')->get()->first();
 
-        $fileUrl = explode($bucket , $record->path_s3)[1];
-        return Storage::disk('s3')->download($fileUrl);
+        $urlExploded = explode('/', $record->path_s3);
+        $bucket = $urlExploded[2];
+        $fileUrl = implode('/', array_slice($urlExploded, 3));
+
+        $storage = Storage::createS3Driver(array_merge(config('filesystems.disks.s3'), ['bucket' => $bucket]));
+
+        return $storage->download($fileUrl, null, ['bucket' => $bucket]);
     }]);
 });
 

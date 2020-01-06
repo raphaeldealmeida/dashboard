@@ -31,7 +31,6 @@ class CallController
                 }
             }, true)
             ->addColumn('action', function ($call) {
-                $call->uuid = '9089dd5f-8eb0-4029-98d3-8a26608517bc';
                 if($call->uuid){
                     $url = route('call.audio',['uuid' => $call->uuid]);
                     return
