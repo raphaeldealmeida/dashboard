@@ -61,3 +61,27 @@ table.dataTable thead .sorting_desc_disabled {
     background-repeat: no-repeat;
     background-position: center right;
 }
+
+#multselect
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled)
+.active, .show>.btn-primary.dropdown-toggle {
+    color: #ffffff;
+    background-color: var(--app-background-color-light) !important;
+    border-color: var(--app-background-color) !important;
+}
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu a:hover,
+.dropdown-menu a:focus,
+.dropdown-menu a:active {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+    background-color: var(--app-background-color) ;
+    color: #FFFFFF;
+}
+.dropdown-item.active, .dropdown-item:active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: var(--app-background-color) ;
+}
+
